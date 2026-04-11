@@ -13,7 +13,7 @@ object Versions {
     const val targetSdk = 36
 
     const val defaultCMake = "3.31.6"
-    const val defaultNDK = "28.0.13004108"
+    const val defaultNDK = "27.1.12297006"
     const val defaultBuildTools = "36.1.0"
 
     // NOTE: increase this value to bump version code

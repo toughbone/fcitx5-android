@@ -48,7 +48,7 @@ Builds:
         ./build-cabal -j app
       - popd
       - mv $$fcitx5-android-prebuilder$$/build ../lib/fcitx5/src/main/cpp/prebuilt
-    ndk: 28.0.13004108
+    ndk: 27.1.12297006
     gradleprops:
       - buildABI=%abi
       - buildTimestamp=%ts

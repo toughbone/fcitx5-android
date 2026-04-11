@@ -56,6 +56,7 @@ android {
         @Suppress("UnstableApiUsage")
         generateLocaleConfig = true
     }
+    ndkVersion = "27.1.12297006"
 }
 
 fcitxComponent {

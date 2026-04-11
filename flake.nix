@@ -34,7 +34,7 @@
               buildToolsVersion = "36.1.0";
               platformToolsVersion = "36.0.2";
               platformVersion = "36";
-              ndkVersion = "28.0.13004108";
+              ndkVersion = "27.1.12297006";
 
               includeNDK = true;
               androidComposition = final.androidenv.composeAndroidPackages {
