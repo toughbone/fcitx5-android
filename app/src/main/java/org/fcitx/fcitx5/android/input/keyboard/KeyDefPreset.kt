@@ -39,6 +39,30 @@ class SymbolKey(
     )
 )
 
+class ChineseAlphabetKey(
+    val character: String,
+    val punctuation: String,
+    variant: Variant = Variant.Normal,
+    popup: Array<Popup>? = null,
+    percentWidth: Float = 0.2f,
+) : KeyDef(
+    Appearance.AltText(
+        displayText = character,
+        altText = punctuation,
+        textSize = 23f,
+        percentWidth = percentWidth,
+        variant = variant
+    ),
+    setOf(
+        Behavior.Press(KeyAction.FcitxKeyAction(character)),
+        Behavior.Swipe(KeyAction.FcitxKeyAction(punctuation))
+    ),
+    popup ?: arrayOf(
+        Popup.AltPreview(character, punctuation),
+        Popup.Keyboard(character)
+    )
+)
+
 class AlphabetKey(
     val character: String,
     val punctuation: String,

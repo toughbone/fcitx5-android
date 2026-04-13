@@ -20,7 +20,7 @@ import org.fcitx.fcitx5.android.input.popup.PopupAction
 import splitties.views.imageResource
 
 @SuppressLint("ViewConstructor")
-class TextKeyboard(
+class ChineseTextKeyboard(
     context: Context,
     theme: Theme
 ) : BaseKeyboard(context, theme, Layout) {
@@ -28,48 +28,36 @@ class TextKeyboard(
     enum class CapsState { None, Once, Lock }
 
     companion object {
-        const val Name = "Text"
+        const val Name = "Chinese"
 
+        // 中文9键布局
         val Layout: List<List<KeyDef>> = listOf(
             listOf(
-                AlphabetKey("Q", "1"),
-                AlphabetKey("W", "2"),
-                AlphabetKey("E", "3"),
-                AlphabetKey("R", "4"),
-                AlphabetKey("T", "5"),
-                AlphabetKey("Y", "6"),
-                AlphabetKey("U", "7"),
-                AlphabetKey("I", "8"),
-                AlphabetKey("O", "9"),
-                AlphabetKey("P", "0")
-            ),
-            listOf(
-                AlphabetKey("A", "@"),
-                AlphabetKey("S", "*"),
-                AlphabetKey("D", "+"),
-                AlphabetKey("F", "-"),
-                AlphabetKey("G", "="),
-                AlphabetKey("H", "/"),
-                AlphabetKey("J", "#"),
-                AlphabetKey("K", "("),
-                AlphabetKey("L", ")")
-            ),
-            listOf(
-                CapsKey(),
-                AlphabetKey("Z", "'"),
-                AlphabetKey("X", ":"),
-                AlphabetKey("C", "\""),
-                AlphabetKey("V", "?"),
-                AlphabetKey("B", "!"),
-                AlphabetKey("N", "~"),
-                AlphabetKey("M", "\\"),
+                SymbolKey("，"),
+                ChineseAlphabetKey("1", "1"),
+                ChineseAlphabetKey("ABC", "2"),
+                ChineseAlphabetKey("DEF", "3"),
                 BackspaceKey()
+            ),
+            listOf(
+                SymbolKey("。"),
+                ChineseAlphabetKey("GHI", "4"),
+                ChineseAlphabetKey("JKL", "5"),
+                ChineseAlphabetKey("MNO", "6"),
+                CapsKey()
+            ),
+            listOf(
+                SymbolKey("！"),
+                ChineseAlphabetKey("PQRS", "7"),
+                ChineseAlphabetKey("TUV", "8"),
+                ChineseAlphabetKey("WXYZ", "9"),
+                ChineseAlphabetKey("0", "？")
             ),
             listOf(
                 LayoutSwitchKey("?123", NumberKeyboard.Name),
                 CommaKey(0.1f, KeyDef.Appearance.Variant.Alternative),
+                LayoutSwitchKey("ABC", TextKeyboard.Name),
                 LanguageKey(),
-                LayoutSwitchKey("中", ChineseTextKeyboard.Name),
                 SpaceKey(),
                 SymbolKey(".", 0.1f, KeyDef.Appearance.Variant.Alternative),
                 ReturnKey()
@@ -80,7 +68,7 @@ class TextKeyboard(
     val caps: ImageKeyView by lazy { findViewById(R.id.button_caps) }
     val backspace: ImageKeyView by lazy { findViewById(R.id.button_backspace) }
     val quickphrase: ImageKeyView by lazy { findViewById(R.id.button_quickphrase) }
-    val lang: ImageKeyView by lazy { findViewById(R.id.button_lang) }
+    val lang: ImageKeyView? by lazy { findViewById(R.id.button_lang) }
     val space: TextKeyView by lazy { findViewById(R.id.button_space) }
     val `return`: ImageKeyView by lazy { findViewById(R.id.button_return) }
 
@@ -224,7 +212,7 @@ class TextKeyboard(
     }
 
     private fun updateLangSwitchKey(visible: Boolean) {
-        lang.visibility = if (visible) View.VISIBLE else View.GONE
+        lang?.visibility = if (visible) View.VISIBLE else View.GONE
     }
 
     private fun updateAlphabetKeys() {
