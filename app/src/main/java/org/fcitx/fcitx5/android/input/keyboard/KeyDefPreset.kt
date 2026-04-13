@@ -54,7 +54,7 @@ class ChineseAlphabetKey(
         variant = variant
     ),
     setOf(
-        Behavior.Press(KeyAction.FcitxKeyAction(character)),
+        Behavior.Press(KeyAction.ChineseAlphabetAction(character)),
         Behavior.Swipe(KeyAction.FcitxKeyAction(punctuation))
     ),
     popup ?: arrayOf(

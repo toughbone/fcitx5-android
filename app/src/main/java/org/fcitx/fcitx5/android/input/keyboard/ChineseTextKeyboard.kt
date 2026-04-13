@@ -44,7 +44,7 @@ class ChineseTextKeyboard(
                 ChineseAlphabetKey("GHI", "4"),
                 ChineseAlphabetKey("JKL", "5"),
                 ChineseAlphabetKey("MNO", "6"),
-                CapsKey()
+                SymbolKey("'", 0.1f, KeyDef.Appearance.Variant.Alternative)
             ),
             listOf(
                 SymbolKey("！"),
@@ -59,7 +59,7 @@ class ChineseTextKeyboard(
                 LayoutSwitchKey("ABC", TextKeyboard.Name),
                 LanguageKey(),
                 SpaceKey(),
-                SymbolKey(".", 0.1f, KeyDef.Appearance.Variant.Alternative),
+                CapsKey(),
                 ReturnKey()
             )
         )

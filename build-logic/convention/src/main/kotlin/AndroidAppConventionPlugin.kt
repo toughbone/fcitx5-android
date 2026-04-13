@@ -47,7 +47,7 @@ class AndroidAppConventionPlugin : AndroidBaseConventionPlugin() {
                     proguardFile(getDefaultProguardFile("proguard-android-optimize.txt"))
                 }
                 debug {
-                    applicationIdSuffix = ".debug"
+                    applicationIdSuffix = ""
                 }
                 all {
                     // remove META-INF/version-control-info.textproto

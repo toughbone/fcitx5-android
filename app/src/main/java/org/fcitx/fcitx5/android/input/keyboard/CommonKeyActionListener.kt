@@ -22,6 +22,7 @@ import org.fcitx.fcitx5.android.input.keyboard.CommonKeyActionListener.Backspace
 import org.fcitx.fcitx5.android.input.keyboard.CommonKeyActionListener.BackspaceSwipeState.Selection
 import org.fcitx.fcitx5.android.input.keyboard.CommonKeyActionListener.BackspaceSwipeState.Stopped
 import org.fcitx.fcitx5.android.input.keyboard.KeyAction.CommitAction
+import org.fcitx.fcitx5.android.input.keyboard.KeyAction.ChineseAlphabetAction
 import org.fcitx.fcitx5.android.input.keyboard.KeyAction.DeleteSelectionAction
 import org.fcitx.fcitx5.android.input.keyboard.KeyAction.FcitxKeyAction
 import org.fcitx.fcitx5.android.input.keyboard.KeyAction.LangSwitchAction
@@ -92,6 +93,25 @@ class CommonKeyActionListener :
             when (action) {
                 is FcitxKeyAction -> service.postFcitxJob {
                     sendKey(action.act, action.states.states, action.code)
+                }
+                is ChineseAlphabetAction -> service.postFcitxJob {
+                    // For Chinese pinyin 9-key input, we need to handle each character individually
+                    // This allows fcitx to process each letter and generate appropriate candidates
+                    when (action.characters) {
+                        "ABC" -> sendKey("2")
+                        "DEF" -> sendKey("3")
+                        "GHI" -> sendKey("4")
+                        "JKL" -> sendKey("5")
+                        "MNO" -> sendKey("6")
+                        "PQRS" -> sendKey("7")
+                        "TUV" -> sendKey("8")
+                        "WXYZ" -> sendKey("9")
+                        else -> {
+                            for (char in action.characters) {
+                                sendKey(char.toString())
+                            }
+                        }
+                    }
                 }
                 is SymAction -> service.postFcitxJob {
                     sendKey(action.sym, action.states)
