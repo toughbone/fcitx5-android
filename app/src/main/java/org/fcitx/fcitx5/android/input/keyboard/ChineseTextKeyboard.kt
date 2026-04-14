@@ -37,7 +37,7 @@ class ChineseTextKeyboard(
                 ChineseAlphabetKey("1", "1"),
                 ChineseAlphabetKey("ABC", "2"),
                 ChineseAlphabetKey("DEF", "3"),
-                BackspaceKey()
+                BackspaceKey(0.2f)
             ),
             listOf(
                 SymbolKey("。", 0.2f),
