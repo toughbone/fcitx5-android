@@ -33,21 +33,21 @@ class ChineseTextKeyboard(
         // 中文9键布局
         val Layout: List<List<KeyDef>> = listOf(
             listOf(
-                SymbolKey("，"),
+                SymbolKey("，", 0.2f),
                 ChineseAlphabetKey("1", "1"),
                 ChineseAlphabetKey("ABC", "2"),
                 ChineseAlphabetKey("DEF", "3"),
                 BackspaceKey()
             ),
             listOf(
-                SymbolKey("。"),
+                SymbolKey("。", 0.2f),
                 ChineseAlphabetKey("GHI", "4"),
                 ChineseAlphabetKey("JKL", "5"),
                 ChineseAlphabetKey("MNO", "6"),
-                SymbolKey("'", 0.1f, KeyDef.Appearance.Variant.Alternative)
+                SymbolKey("'", 0.2f, KeyDef.Appearance.Variant.Alternative)
             ),
             listOf(
-                SymbolKey("！"),
+                SymbolKey("！", 0.2f),
                 ChineseAlphabetKey("PQRS", "7"),
                 ChineseAlphabetKey("TUV", "8"),
                 ChineseAlphabetKey("WXYZ", "9"),
@@ -55,17 +55,17 @@ class ChineseTextKeyboard(
             ),
             listOf(
                 LayoutSwitchKey("?123", NumberKeyboard.Name),
-                CommaKey(0.1f, KeyDef.Appearance.Variant.Alternative),
-                LayoutSwitchKey("ABC", TextKeyboard.Name),
+//                CommaKey(0.1f, KeyDef.Appearance.Variant.Alternative),
                 LanguageKey(),
+                LayoutSwitchKey("英", TextKeyboard.Name),
                 SpaceKey(),
-                CapsKey(),
+//                CapsKey(),
                 ReturnKey()
             )
         )
     }
 
-    val caps: ImageKeyView by lazy { findViewById(R.id.button_caps) }
+    val caps: ImageKeyView? by lazy { findViewById(R.id.button_caps) }
     val backspace: ImageKeyView by lazy { findViewById(R.id.button_backspace) }
     val quickphrase: ImageKeyView by lazy { findViewById(R.id.button_quickphrase) }
     val lang: ImageKeyView? by lazy { findViewById(R.id.button_lang) }
@@ -202,7 +202,7 @@ class ChineseTextKeyboard(
     }
 
     private fun updateCapsButtonIcon() {
-        caps.img.apply {
+        caps?.img?.apply {
             imageResource = when (capsState) {
                 CapsState.None -> R.drawable.ic_capslock_none
                 CapsState.Once -> R.drawable.ic_capslock_once

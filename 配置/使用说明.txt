@@ -1,0 +1,9 @@
+1.安装小企鹅输入法
+2.安装中州韵插件
+3.先找个编辑框输入文字，弹起小企鹅输入法弹窗，点击快速栏的...-->点击齿轮设置按钮-->点击插件，确认rime插件已加载-->点击输入法，添加中州韵-->点击快速栏的...-->点击<>-->选择中州韵
+4.确认/storage/emulated/0/Android/data/org.fcitx.fcitx5.android/files/data/rime/存在
+5.删除build目录 adb shell rm -rf /storage/emulated/0/Android/data/org.fcitx.fcitx5.android/files/data/rime/build
+6.将需要的词典 push到/storage/emulated/0/Android/data/org.fcitx.fcitx5.android/files/data/rime/
+7.将luna_pinyin.extended.dict.yaml和t9_pinyin.schema.yaml push到/storage/emulated/0/Android/data/org.fcitx.fcitx5.android/files/data/rime/
+8.词典是在luna_pinyin.extended.dict.yaml中配置的
+9.点击快速栏的...-->点击<>-->点击重新部署

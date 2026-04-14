@@ -1,0 +1,51 @@
+# Rime user dictionary
+#@/db_name	luna_pinyin
+#@/db_type	userdb
+#@/rime_version	1.13.1
+#@/tick	63
+#@/user_id	e03106bf-7640-4a2f-b65d-ad5ec98a587d
+bei jing 	北京	c=1 d=0.822835 t=63
+chao yang 	朝陽	c=1 d=0.882497 t=63
+dao jia 	到家	c=1 d=0.946485 t=63
+dong li 	東里	c=0 d=0.0869358 t=63
+dong li guan 	東里官	c=2 d=1.75181 t=63
+en 	嗯	c=2 d=1.91678 t=63
+er zi 	兒子	c=3 d=2.71453 t=63
+feng ge 	風格	c=0 d=0.0995012 t=63
+feng ge huan jing 	風格環境	c=1 d=1 t=63
+fu yi 	福義	c=1 d=0.865291 t=63
+guan 	官	c=0 d=0.0869358 t=63
+gui nv 	閨女	c=3 d=2.75556 t=63
+hao 	好	c=1 d=0.869358 t=63
+hao ba 	好吧	c=1 d=0.965605 t=63
+hao de 	好的	c=2 d=1.73712 t=63
+heng shui shi 	衡水市	c=1 d=0.891366 t=63
+hua yuan 	花園	c=1 d=0.88692 t=63
+huan jing 	環境	c=0 d=0.0995012 t=63
+hui long guan 	回龍觀	c=1 d=0.937067 t=63
+liang 	良	c=0 d=0.0737123 t=63
+luo qing fen 	雒慶芬	c=3 d=2.47354 t=63
+o 	哦	c=1 d=0.970446 t=63
+she qu 	社區	c=0 d=0.0937067 t=63
+wan long 	萬龍	c=2 d=1.95384 t=63
+wan long she qu 	萬龍社區	c=1 d=0.941765 t=63
+wo xiang qu 	我想去	c=1 d=0.895834 t=63
+xian xie 	先寫	c=1 d=0.980199 t=63
+xie 	寫	c=1 d=0.995012 t=63
+xin yi 	歆怡	c=1 d=0.852408 t=63
+xin yu 	昕宇	c=2 d=1.5955 t=63
+yao song mei 	姚松梅	c=2 d=1.65806 t=63
+yi jing 	已經	c=1 d=0.748264 t=63
+yong liang 	永良	c=1 d=0.839457 t=63
+yong shun 	永順	c=1 d=0.83527 t=63
+zai shuo 	再說	c=1 d=0.951229 t=63
+zhang 	張	c=4 d=3.29784 t=63
+zhang de cheng 	張德成	c=3 d=2.45318 t=63
+zhang fu yi 	張福義	c=3 d=2.433 t=63
+zhang jin yue 	張金月	c=3 d=2.49408 t=63
+zhang xin yi 	張歆怡	c=2 d=1.64382 t=63
+zhang xin yu 	張昕宇	c=1 d=0.767206 t=63
+zhang yong 	張永	c=0 d=0.0737123 t=63
+zhang yong liang 	張永良	c=3 d=2.32901 t=63
+zhi dao le 	知道了	c=1 d=0.97531 t=63
+zuo ye 	作業	c=2 d=1.97516 t=63

@@ -1,0 +1,10 @@
+var:
+  last_build_time: 1776066050
+  option:
+    ascii_punct: false
+    full_shape: false
+    simplification: true
+  previously_selected_schema: t9_pinyin
+  schema_access_time:
+    luna_pinyin: 1776062999
+    t9_pinyin: 1776070033
