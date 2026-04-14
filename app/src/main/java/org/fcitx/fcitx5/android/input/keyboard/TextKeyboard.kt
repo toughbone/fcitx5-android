@@ -32,19 +32,19 @@ class TextKeyboard(
 
         val Layout: List<List<KeyDef>> = listOf(
             listOf(
-                AlphabetKey("Q", "1"),
-                AlphabetKey("W", "2"),
-                AlphabetKey("E", "3"),
-                AlphabetKey("R", "4"),
-                AlphabetKey("T", "5"),
-                AlphabetKey("Y", "6"),
-                AlphabetKey("U", "7"),
-                AlphabetKey("I", "8"),
-                AlphabetKey("O", "9"),
-                AlphabetKey("P", "0")
+                AlphabetKey("Q", "!"),
+                AlphabetKey("W", "@"),
+                AlphabetKey("E", "#"),
+                AlphabetKey("R", "$"),
+                AlphabetKey("T", "%"),
+                AlphabetKey("Y", "^"),
+                AlphabetKey("U", "&"),
+                AlphabetKey("I", "*"),
+                AlphabetKey("O", "("),
+                AlphabetKey("P", ")")
             ),
             listOf(
-                AlphabetKey("A", "@"),
+                AlphabetKey("A", "_"),
                 AlphabetKey("S", "*"),
                 AlphabetKey("D", "+"),
                 AlphabetKey("F", "-"),
