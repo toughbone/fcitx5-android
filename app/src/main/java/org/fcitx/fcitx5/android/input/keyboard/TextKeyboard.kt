@@ -124,11 +124,11 @@ class TextKeyboard(
                             transformed = action.copy(act = action.act.lowercase())
                         }
                         CapsState.Once -> {
-                            transformed = action.copy(
-                                act = action.act.uppercase(),
-                                states = KeyStates(KeyState.Virtual, KeyState.Shift)
-                            )
-                            switchCapsState()
+//                            transformed = action.copy(
+//                                act = action.act.uppercase(),
+//                                states = KeyStates(KeyState.Virtual, KeyState.Shift)
+//                            )
+//                            switchCapsState()
                         }
                         CapsState.Lock -> {
                             transformed = action.copy(
@@ -139,12 +139,12 @@ class TextKeyboard(
                     }
                 }
                 KeyActionListener.Source.Popup -> {
-                    if (capsState == CapsState.Once) {
-                        switchCapsState()
-                    }
+//                    if (capsState == CapsState.Once) {
+//                        switchCapsState()
+//                    }
                 }
             }
-            is KeyAction.CapsAction -> switchCapsState(action.lock)
+            is KeyAction.CapsAction -> switchCapsState()
             else -> {}
         }
         super.onAction(transformed, source)
@@ -198,16 +198,9 @@ class TextKeyboard(
 
     private fun switchCapsState(lock: Boolean = false) {
         capsState =
-            if (lock) {
-                when (capsState) {
-                    CapsState.Lock -> CapsState.None
-                    else -> CapsState.Lock
-                }
-            } else {
-                when (capsState) {
-                    CapsState.None -> CapsState.Once
-                    else -> CapsState.None
-                }
+            when (capsState) {
+                CapsState.None -> CapsState.Lock
+                else -> CapsState.None
             }
         updateCapsButtonIcon()
         updateAlphabetKeys()
