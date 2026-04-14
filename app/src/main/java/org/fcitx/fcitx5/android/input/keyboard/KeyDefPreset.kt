@@ -57,10 +57,10 @@ class ChineseAlphabetKey(
         Behavior.Press(KeyAction.ChineseAlphabetAction(character)),
         Behavior.Swipe(KeyAction.FcitxKeyAction(punctuation))
     ),
-    popup ?: arrayOf(
-        Popup.AltPreview(character, punctuation),
-        Popup.Keyboard(character)
-    )
+//    popup ?: arrayOf(
+//        Popup.AltPreview(character, punctuation),
+//        Popup.Keyboard(character)
+//    )
 )
 
 class AlphabetKey(
