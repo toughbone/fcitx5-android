@@ -44,14 +44,14 @@ class ChineseTextKeyboard(
                 ChineseAlphabetKey("GHI", "4"),
                 ChineseAlphabetKey("JKL", "5"),
                 ChineseAlphabetKey("MNO", "6"),
-                SymbolKey("、", 0.2f, KeyDef.Appearance.Variant.Alternative)
+                SymbolKey("'", 0.2f, KeyDef.Appearance.Variant.Alternative)
             ),
             listOf(
                 SymbolKey("！", 0.2f),
                 ChineseAlphabetKey("PQRS", "7"),
                 ChineseAlphabetKey("TUV", "8"),
                 ChineseAlphabetKey("WXYZ", "9"),
-                SymbolKey(";", 0.2f),
+                SymbolKey("、", 0.2f),
             ),
             listOf(
                 LayoutSwitchKey("?123", NumberKeyboard.Name),
