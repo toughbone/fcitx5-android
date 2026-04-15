@@ -7,3 +7,5 @@
 7.将luna_pinyin.extended.dict.yaml和t9_pinyin.schema.yaml push到/storage/emulated/0/Android/data/org.fcitx.fcitx5.android/files/data/rime/
 8.词典是在luna_pinyin.extended.dict.yaml中配置的
 9.点击快速栏的...-->点击<>-->点击重新部署
+
+词库修改后，也修改 assets 目录下的文件，为了使用方便，在输入法-设置-高级 中添加了一件配置词典的功能，所以词典更新了之后别忘记同步更新assets

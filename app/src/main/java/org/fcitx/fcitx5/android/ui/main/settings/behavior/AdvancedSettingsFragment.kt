@@ -33,6 +33,8 @@ import org.fcitx.fcitx5.android.utils.importErrorDialog
 import org.fcitx.fcitx5.android.utils.iso8601UTCDateTime
 import org.fcitx.fcitx5.android.utils.queryFileName
 import org.fcitx.fcitx5.android.utils.toast
+import android.util.Log
+import java.io.File
 
 class AdvancedSettingsFragment : ManagedPreferenceFragment(AppPrefs.getInstance().advanced) {
 
@@ -43,6 +45,35 @@ class AdvancedSettingsFragment : ManagedPreferenceFragment(AppPrefs.getInstance(
     private lateinit var exportLauncher: ActivityResultLauncher<String>
 
     private lateinit var importLauncher: ActivityResultLauncher<String>
+
+    private fun getRimeDir(context: android.content.Context): File {
+        val TAG = "RimePath"
+
+        // 1. 获取外部存储路径: /storage/emulated/0/Android/data/包名/files/data/rime
+        val externalFilesDir = context.getExternalFilesDir(null)
+        val externalRimeDir = File(externalFilesDir, "data/rime")
+
+        // 2. 检查外部目录是否存在（即用户是否已经放了配置在里面）
+        val finalDir = if (externalRimeDir.exists() && externalRimeDir.isDirectory) {
+            Log.d(TAG, "使用外部存储目录")
+            externalRimeDir
+        } else {
+            // 3. 否则使用内部存储路径: /data/user/0/包名/files/data/rime
+            Log.d(TAG, "外部目录不存在，回退至内部存储目录")
+            File(context.filesDir, "data/rime")
+        }
+
+        // 确保目录结构存在，避免后续读写报错
+        if (!finalDir.exists()) {
+            val created = finalDir.mkdirs()
+            Log.d(TAG, "目录不存在，尝试创建: $created")
+        }
+
+        // 4. 打印最终生成的全路径
+        Log.i(TAG, "最终使用的 Rime 路径: ${finalDir.absolutePath}")
+
+        return finalDir
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -137,6 +168,90 @@ class AdvancedSettingsFragment : ManagedPreferenceFragment(AppPrefs.getInstance(
                 .setMessage(R.string.confirm_import_user_data)
                 .setPositiveButton(android.R.string.ok) { _, _ ->
                     importLauncher.launch("application/zip")
+                }
+                .setNegativeButton(android.R.string.cancel, null)
+                .show()
+        }
+        screen.addPreference("初始化词库") {
+            AlertDialog.Builder(ctx)
+                .setIconAttribute(android.R.attr.alertDialogIcon)
+                .setTitle("初始化词库")
+                .setMessage("确定要初始化词库吗？这将删除现有的词库构建文件并重新复制词库文件。")
+                .setPositiveButton(android.R.string.ok) { _, _ ->
+                    lifecycleScope.withLoadingDialog(ctx) {
+                        withContext(NonCancellable + Dispatchers.IO) {
+                            val TAG = "RimePath"
+                            try {
+                                Log.i(TAG, ">>> 开始强制覆盖词库初始化...")
+
+                                // 1. 停止服务
+                                FcitxDaemon.stopFcitx()
+                                Log.d(TAG, "Fcitx 已停止")
+
+                                val rimeDir = getRimeDir(ctx)
+                                Log.d(TAG, "工作目标路径: ${rimeDir.absolutePath}")
+
+                                // 2. 清理旧缓存（强制 Rime 重新部署）
+                                val buildDir = rimeDir.resolve("build")
+                                if (buildDir.exists()) {
+                                    val deleted = buildDir.deleteRecursively()
+                                    Log.d(TAG, "清理旧 build 目录: $deleted")
+                                }
+
+                                // 3. 确保父目录存在
+                                if (!rimeDir.exists()) rimeDir.mkdirs()
+
+                                // 4. 定义要覆盖的文件列表
+                                val filesToCopy = arrayOf(
+                                    "luna_pinyin.extended.dict.yaml",
+                                    "t9_pinyin.schema.yaml",
+                                    "toughbone.dict.yaml",
+                                    "base_high.dict.yaml",
+                                    "common_3500.dict.yaml"
+                                )
+
+                                val assetManager = ctx.assets
+                                filesToCopy.forEach { fileName ->
+                                    val outputFile = rimeDir.resolve(fileName)
+                                    try {
+                                        if (outputFile.exists()) {
+                                            val deleted = outputFile.delete()
+                                            Log.d(TAG, "删除旧文件 $fileName: $deleted")
+                                        }
+
+                                        assetManager.open(fileName).use { input ->
+                                            outputFile.outputStream().use { output ->
+                                                input.copyTo(output)
+                                            }
+                                        }
+                                        Log.d(TAG, "覆盖成功: $fileName")
+                                    } catch (e: Exception) {
+                                        val errorMsg = "复制 $fileName 失败: ${e.message}"
+                                        Log.e(TAG, errorMsg)
+
+                                        // 关键：切换到主线程弹出 Toast
+                                        withContext(Dispatchers.Main) {
+                                            ctx.toast(errorMsg)
+                                        }
+                                    }
+                                }
+
+                                // 5. 重启服务
+                                FcitxDaemon.startFcitx()
+                                Log.i(TAG, "<<< 初始化完成，Fcitx 已重启")
+
+                                withContext(Dispatchers.Main) {
+                                    ctx.toast("词库已强制更新并重启")
+                                }
+                            } catch (e: Exception) {
+                                Log.e(TAG, "致命错误: ", e)
+                                FcitxDaemon.startFcitx() // 保底重启
+                                withContext(Dispatchers.Main) {
+                                    ctx.toast("初始化异常: ${e.message}")
+                                }
+                            }
+                        }
+                    }
                 }
                 .setNegativeButton(android.R.string.cancel, null)
                 .show()

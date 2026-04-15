@@ -1,0 +1,9 @@
+---
+name: luna_pinyin.extended
+version: "1.0"
+sort: by_weight
+import_tables:
+  - toughbone: { weight: 10 }
+  - base_high
+  - common_3500
+...
