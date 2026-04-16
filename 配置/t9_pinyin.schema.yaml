@@ -38,7 +38,7 @@ engine:
     - uniqueness
 
 speller:
-  alphabet: "23456789abcdefghijklmnopqrstuvwxyz'" # 允许字母进入编码区
+  alphabet: "23456789'" # 允许字母进入编码区
   initials: "23456789"
   delimiter: " '"       # 明确指定分词符包含单引号
   # 核心逻辑：拼写运算，将所有拼音字母映射到数字键
@@ -51,10 +51,10 @@ speller:
     - xform/[pqrs]/7/
     - xform/[tuv]/8/
     - xform/[wxyz]/9/
-    # 简拼支持：允许只输入每个字的首个数字
-    - abbrev/^([2-9]).+$/$1/
-    # 关键：限制模糊匹配的深度
-    # 这样可以防止输入 426 时，引擎过度发散去匹配一些极冷门的组合
+    # 2. 【关键修正】消除词库拼音中的空格，使长词能被连续的数字匹配
+    - xform/\s//
+
+    # 3. 简拼支持（保留一个即可，你之前重复写了两遍）
     - abbrev/^([2-9]).+$/$1/
 
 translator:
